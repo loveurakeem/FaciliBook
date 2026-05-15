@@ -1,0 +1,139 @@
+:root {
+    --primary-blue: #0d6efd;
+    --dark-blue: #084298;
+    --light-bg: #f0f2f5;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-bg);
+}
+
+/* Sidebar Styling */
+#sidebar-wrapper {
+    min-height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar-heading {
+    padding: 1.5rem 1.25rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-blue);
+}
+
+.list-group-item {
+    border: none;
+    padding: 12px 20px;
+    margin: 4px 12px;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.list-group-item.active {
+    background-color: var(--primary-blue) !important;
+}
+
+/* Card & Component Styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+}
+
+.btn-round {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+footer {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+
+
+:root {
+    --sidebar-blue: #2c52e1;
+    --bg-light: #f4f7fe;
+    --text-main: #1b2559;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+}
+
+/* Sidebar styling from image_a0b1dc.png */
+#sidebar-wrapper {
+    width: 280px;
+    background: var(--sidebar-blue);
+    min-height: 100vh;
+    color: white;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 2rem 1.5rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+#sidebar-wrapper .list-group-item {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    margin: 5px 15px;
+    border-radius: 12px;
+}
+
+#sidebar-wrapper .list-group-item.active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* FaciliBook Card Style */
+.stat-card {
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.action-card {
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-card:hover {
+    background: #edf2ff;
+}
