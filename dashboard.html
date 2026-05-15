@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - FaciliBook</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="d-flex" id="wrapper">
+
+  <div id="sidebar-wrapper">
+    <div class="sidebar-heading">
+      <div class="fw-bold">FaciliBook</div>
+      <div class="small fw-normal opacity-75" style="font-size:.7rem;">NHS Reservation Portal</div>
+    </div>
+    <div class="list-group mt-3">
+      <small class="px-4 text-uppercase opacity-50 mb-2" style="font-size:.6rem;">Main</small>
+      <a href="dashboard.html" class="list-group-item active">Dashboard</a>
+      <a href="facilities.html" class="list-group-item">Facilities</a>
+      <a href="reservation-form.html" class="list-group-item">Reserve a Facility</a>
+
+      <small class="px-4 text-uppercase opacity-50 mb-2 mt-4" style="font-size:.6rem;">My Account</small>
+      <a href="my-reservations.html" class="list-group-item">My Reservations</a>
+      <a href="profile.html" class="list-group-item">Profile</a>
+
+      <div id="adminSection" style="display:none;">
+        <small class="px-4 text-uppercase opacity-50 mb-2 mt-4" style="font-size:.6rem;">Admin Management</small>
+        <a href="admin.html" class="list-group-item" id="adminLink">
+          🛡️ Admin Dashboard
+        </a>
+      </div>
+
+      <a href="#" onclick="logout()" class="list-group-item mt-3 text-white">Logout</a>
+    </div>
+  </div>
+
+  <div class="container-fluid px-5">
+
+    <div class="d-flex justify-content-between align-items-center py-4">
+      <h4 class="mb-0">Welcome, <span class="text-primary fw-bold" id="welcomeName">Student!</span></h4>
+    </div>
+
+    <h2 class="fw-bold mb-1">Dashboard</h2>
+    <p class="text-muted mb-4">Overview of your facility reservations</p>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-3">
+        <div class="stat-card shadow-sm p-3 bg-white rounded-4">
+          <div class="stat-icon bg-primary bg-opacity-10 text-primary mb-2 d-inline-block p-2 rounded">🏢</div>
+          <h2 class="fw-bold mb-0">7</h2>
+          <div class="text-muted small">Total Facilities</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card shadow-sm p-3 bg-white rounded-4">
+          <div class="stat-icon bg-info bg-opacity-10 text-info mb-2 d-inline-block p-2 rounded">✔</div>
+          <h2 class="fw-bold mb-0">6</h2>
+          <div class="text-muted small">Available Rooms</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card shadow-sm p-3 bg-white rounded-4">
+          <div class="stat-icon bg-warning bg-opacity-10 text-warning mb-2 d-inline-block p-2 rounded">⏳</div>
+          <h2 class="fw-bold mb-0" id="pendingCount">—</h2>
+          <div class="text-muted small">My Pending</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card shadow-sm p-3 bg-white rounded-4">
+          <div class="stat-icon bg-success bg-opacity-10 text-success mb-2 d-inline-block p-2 rounded">👍</div>
+          <h2 class="fw-bold mb-0" id="approvedCount">—</h2>
+          <div class="text-muted small">My Approved</div>
+        </div>
+      </div>
+    </div>
+
+    <h5 class="fw-bold mb-3">Quick Actions</h5>
+    <div class="row g-3 mb-5">
+      <div class="col-md-3">
+        <div class="action-card d-flex align-items-center shadow-sm p-3 bg-white rounded-4"
+             style="cursor:pointer;" onclick="location.href='reservation-form.html'">
+          <div class="bg-primary bg-opacity-10 p-2 rounded me-3 text-primary fw-bold fs-5">+</div>
+          <div>
+            <div class="fw-bold small">New Reservation</div>
+            <div class="text-muted" style="font-size:.7rem;">Book a facility</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="action-card d-flex align-items-center shadow-sm p-3 bg-white rounded-4"
+             style="cursor:pointer;" onclick="location.href='my-reservations.html'">
+          <div class="bg-success bg-opacity-10 p-2 rounded me-3 text-success fs-5">📋</div>
+          <div>
+            <div class="fw-bold small">My Reservations</div>
+            <div class="text-muted" style="font-size:.7rem;">View bookings</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-5">
+      <div class="p-4 d-flex justify-content-between align-items-center bg-white">
+        <h5 class="fw-bold mb-0">Recent Reservations</h5>
+        <a href="my-reservations.html" class="btn btn-sm btn-light text-primary fw-bold">View All</a>
+      </div>
+      <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+          <thead class="bg-light">
+            <tr class="text-muted small">
+              <th class="ps-4">ID</th>
+              <th>FACILITY</th>
+              <th>DATE</th>
+              <th>TIME SLOT</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="recentTableBody">
+            <tr>
+              <td colspan="5" class="text-center text-muted py-3">Loading…</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer class="text-center text-muted py-4 small">
+      School Facility Reservation System © 2026 | National High School | All rights reserved.
+    </footer>
+  </div></div><div id="toastContainer"
+     style="position:fixed; top:20px; right:20px; z-index:9999; min-width:280px;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>
