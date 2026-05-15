@@ -307,7 +307,10 @@ async function initAdmin() {
   if (document.getElementById("statRejected")) document.getElementById("statRejected").textContent = stats.rejected;
 
   const reservations = await getAllReservations();
-  renderAdminTable(reservations);
+  
+  // Filter to only show pending requests in the table
+  const pendingReservations = reservations.filter(r => r.status === "pending");
+  renderAdminTable(pendingReservations);
 }
 
 function renderAdminTable(reservations) {
@@ -335,14 +338,18 @@ function renderAdminTable(reservations) {
 
 async function adminApprove(reservationId) {
   await updateReservationStatus(reservationId, "approved");
-  const cell = document.getElementById(`status-${reservationId}`);
-  if (cell) cell.innerHTML = statusBadge("approved");
+  const row = document.getElementById(`row-${reservationId}`);
+  if (row) {
+    row.remove();
+  }
 }
 
 async function adminReject(reservationId) {
   await updateReservationStatus(reservationId, "rejected");
-  const cell = document.getElementById(`status-${reservationId}`);
-  if (cell) cell.innerHTML = statusBadge("rejected");
+  const row = document.getElementById(`row-${reservationId}`);
+  if (row) {
+    row.remove();
+  }
 }
 
 // ================================================================
