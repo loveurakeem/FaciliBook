@@ -39,10 +39,18 @@ async function handleLogin(event) {
   btn.disabled    = true;
   btn.textContent = "Signing in…";
 
-  await loginUser(email, password); // redirects on success
-
-  btn.disabled    = false;
-  btn.textContent = "Login";
+  try {
+    await loginUser(email, password); // redirects to dashboard.html on success
+  } catch (error) {
+    console.error("Login error captured:", error);
+    // If your loginUser function doesn't automatically fire the toast notification,
+    // you can uncomment the line below to show the friendly error message:
+    // showError(friendlyError(error.code) || "An unexpected error occurred.");
+  } finally {
+    // The finally block ALWAYS runs, guaranteeing your UI recovers if login fails
+    btn.disabled    = false;
+    btn.textContent = "Login";
+  }
 }
 
 async function handleRegister(event) {
