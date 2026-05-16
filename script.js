@@ -8,6 +8,8 @@ import {
   registerUser,
   logoutUser,
   requireAuth,
+  onAuthStateChanged,
+  auth,
   submitReservation,
   getMyReservations,
   getAllReservations,
@@ -39,18 +41,10 @@ async function handleLogin(event) {
   btn.disabled    = true;
   btn.textContent = "Signing in…";
 
-  try {
-    await loginUser(email, password); // redirects to dashboard.html on success
-  } catch (error) {
-    console.error("Login error captured:", error);
-    // If your loginUser function doesn't automatically fire the toast notification,
-    // you can uncomment the line below to show the friendly error message:
-    // showError(friendlyError(error.code) || "An unexpected error occurred.");
-  } finally {
-    // The finally block ALWAYS runs, guaranteeing your UI recovers if login fails
-    btn.disabled    = false;
-    btn.textContent = "Login";
-  }
+  await loginUser(email, password); // redirects on success
+
+  btn.disabled    = false;
+  btn.textContent = "Login";
 }
 
 async function handleRegister(event) {
@@ -424,7 +418,16 @@ async function logout() {
 const page = window.location.pathname.split("/").pop() || "index.html";
 
 const pageInitMap = {
-  "login.html":            () => document.getElementById("loginForm")?.addEventListener("submit", handleLogin),
+  "login.html": () => {
+    // Redirect to dashboard if user is already logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const base = window.location.href.replace(/\/[^/]*$/, "/");
+        window.location.href = base + "dashboard.html";
+      }
+    });
+    document.getElementById("loginForm")?.addEventListener("submit", handleLogin);
+  },
   "register.html":         () => document.getElementById("registerForm")?.addEventListener("submit", handleRegister),
   "dashboard.html":        initDashboard,
   "facilities.html":       initFacilities,
@@ -445,6 +448,6 @@ if (pageInitMap[page]) {
 }
 
 window.goToReserve  = goToReserve;
+window.logout       = logout;
 window.adminApprove = adminApprove;
 window.adminReject  = adminReject;
-window.logout = logout;
