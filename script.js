@@ -408,7 +408,6 @@ function goToReserve(facilityName) {
 async function logout() {
   await logoutUser();
 }
-window.logout = logout;
 
 // ================================================================
 //  AUTO-INIT
@@ -440,3 +439,4 @@ if (pageInitMap[page]) {
 window.goToReserve  = goToReserve;
 window.adminApprove = adminApprove;
 window.adminReject  = adminReject;
+window.logout = logout;
