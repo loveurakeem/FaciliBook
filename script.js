@@ -416,7 +416,7 @@ async function logout() {
 const page = window.location.pathname.split("/").pop() || "index.html";
 
 const pageInitMap = {
-  "index.html":            () => document.getElementById("loginForm")?.addEventListener("submit", handleLogin),
+  "login.html":            () => document.getElementById("loginForm")?.addEventListener("submit", handleLogin),
   "register.html":         () => document.getElementById("registerForm")?.addEventListener("submit", handleRegister),
   "dashboard.html":        initDashboard,
   "facilities.html":       initFacilities,
