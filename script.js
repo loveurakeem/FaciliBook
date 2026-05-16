@@ -415,15 +415,23 @@ async function logout() {
 //  AUTO-INIT
 // ================================================================
 
-const page = window.location.pathname.split("/").pop() || "index.html";
+// 1. Clean the path by removing query strings (?) and hashes (#)
+const cleanPath = window.location.pathname.split('?')[0].split('#')[0];
+
+// 2. Extract the file name or folder name
+let page = cleanPath.split("/").filter(Boolean).pop() || "index.html";
+
+// 3. Normalize for Vercel Clean URLs (if it hides .html, put it back in memory)
+if (!page.endsWith(".html") && page !== "index.html") {
+  page = page + ".html";
+}
 
 const pageInitMap = {
-  "login.html": () => {
-    // Redirect to dashboard if user is already logged in
+  // 👇 CHANGED FROM "login.html" TO "index.html" 👇
+  "index.html": () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const base = window.location.href.replace(/\/[^/]*$/, "/");
-        window.location.href = base + "dashboard.html";
+        window.location.href = "dashboard.html";
       }
     });
     document.getElementById("loginForm")?.addEventListener("submit", handleLogin);
@@ -445,6 +453,10 @@ const pageInitMap = {
 
 if (pageInitMap[page]) {
   document.addEventListener("DOMContentLoaded", pageInitMap[page]);
+  // Catch-all in case the DOM is already loaded
+  if (document.readyState !== "loading") {
+    pageInitMap[page]();
+  }
 }
 
 window.goToReserve  = goToReserve;

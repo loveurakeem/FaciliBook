@@ -49,8 +49,7 @@ const db   = getFirestore(app);
 async function loginUser(email, password) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    const base = window.location.href.replace(/\/[^/]*$/, "/");
-    window.location.href = base + "dashboard.html";
+    window.location.href = "dashboard.html"; // <-- Simplified
   } catch (error) {
     showError("Login failed: " + friendlyError(error.code));
   }
@@ -73,8 +72,7 @@ async function registerUser(email, password, studentId, fullName) {
     // -----------------------------------------------
 
     showSuccess("Account created successfully!");
-    const base = window.location.href.replace(/\/[^/]*$/, "/");
-    window.location.href = base + "dashboard.html";
+    window.location.href = "dashboard.html"; // <-- Simplified
   } catch (error) {
     showError("Registration failed: " + friendlyError(error.code));
     throw error;
@@ -83,16 +81,14 @@ async function registerUser(email, password, studentId, fullName) {
 
 async function logoutUser() {
   await signOut(auth);
-  const base = window.location.href.replace(/\/[^/]*$/, "/");
-  window.location.href = base + "login.html";
+  window.location.href = "index.html"; // <-- Changed to index.html and Simplified
 }
 
 function requireAuth() {
   return new Promise((resolve) => {
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        const base = window.location.href.replace(/\/[^/]*$/, "/");
-        window.location.href = base + "login.html";
+        window.location.href = "index.html"; // <-- Changed to index.html and Simplified
       } else {
         resolve(user);
       }
