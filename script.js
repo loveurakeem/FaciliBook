@@ -408,6 +408,7 @@ function goToReserve(facilityName) {
 async function logout() {
   await logoutUser();
 }
+window.logout = logout;
 
 // ================================================================
 //  AUTO-INIT
