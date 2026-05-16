@@ -438,6 +438,5 @@ if (pageInitMap[page]) {
 }
 
 window.goToReserve  = goToReserve;
-window.logout       = logout;
 window.adminApprove = adminApprove;
 window.adminReject  = adminReject;
